@@ -139,7 +139,7 @@ describe('interval arithmetic evaluator', function () {
       cleanAssert(exp, '_I.sub(_I.ONE, utils.castInterval(_I, [2, 3]))');
       I.almostEqual(exp.eval(), [-2, -1]);
 
-      exp = compile('[-1, 1] - [1, 1]');
+      exp = compile('[-1, 1] - [1, +1]');
       cleanAssert(exp, '_I.sub(utils.castInterval(_I, [-1, 1]), utils.castInterval(_I, [1, 1]))');
       I.almostEqual(exp.eval(), [-2, 0]);
 
