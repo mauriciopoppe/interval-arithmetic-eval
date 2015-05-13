@@ -73,7 +73,32 @@ to be substituted, the following transformations are done with the values when e
 
 **returns** {Interval} Returns an instance of the [interval-arithmetic module](https://github.com/maurizzzio/interval-arithmetic)
 
+### `compile.policies`
+
+Policies used during the evaluation of an expression
+
+#### `compile.policies.identifierAllowed`
+
+Assign a function which determines if the given name to be resolved from the scope is valid
+
+**default value**
+```javascript
+compile.policies.identifierAllowed = function (name) {
+  // any name from the scope is valid
+  return true;
+}
+```
 ## Examples
+
+Boilerplate code for the examples:
+
+```javascript
+compile(expression).eval(scope)
+
+// e.g.
+compile('1').eval({});        // { lo: 1, hi: 1 }
+compile('x').eval({x: 1})     // { lo: 1, hi: 1 }
+```
 
 ```javascript
 1
