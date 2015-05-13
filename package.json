@@ -1,0 +1,41 @@
+{
+  "name": "interval-arithmetic-eval",
+  "version": "0.0.0",
+  "description": "Interprets/evaluates mathematical expressions using interval arithmetic",
+  "bugs": "https://github.com/maurizzzio/interval-arithmetic-eval/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "author": "Mauricio Poppe <mauricio.poppe@gmail.com>",
+  "files": [
+    "index.js",
+    "lib",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maurizzzio/interval-arithmetic-eval"
+  },
+  "keywords": [
+    "interval-arithmetic-eval",
+    "interval",
+    "arithmetic",
+    "interpreter",
+    "eval"
+  ],
+  "dependencies": {
+    "jsep": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.3.7",
+    "eslint": "^0.20.0",
+    "mocha": "^2.2.1"
+  },
+  "scripts": {
+    "istanbul": "istanbul cover _mocha -- -R spec test/index.js",
+    "lint": "eslint index.js lib test",
+    "test": "mocha -R spec test/index.js",
+    "test:watch": "nodemon --watch lib --watch test --watch index.js --exec 'npm test'",
+    "start": "npm run test:watch",
+    "toc": "./node_modules/.bin/doctoc ."
+  }
+}
