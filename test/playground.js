@@ -1,6 +1,7 @@
 /**
  * Created by mauricio on 5/13/15.
  */
+'use strict';
 var compile = require('../');
 var Interval = require('interval-arithmetic');
 
