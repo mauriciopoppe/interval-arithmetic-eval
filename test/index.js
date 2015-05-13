@@ -3,7 +3,6 @@
 var assert = require('assert');
 var I = require('interval-arithmetic');
 var compile = require('../');
-var utils = require('../lib/utils');
 var exp;
 
 function cleanAssert(a, b) {
@@ -66,11 +65,11 @@ describe('interval arithmetic evaluator', function () {
     it('should eval scope stored variables', function () {
       // numbers as a bounded singleton interval
       exp = compile('x');
-      I.almostEqual(exp.eval({ x : 3 }), [3, 3]);
+      I.almostEqual(exp.eval({ x: 3 }), [3, 3]);
 
       // arrays as a bounded interval
       exp = compile('x');
-      I.almostEqual(exp.eval({ x : [2, 3] }), [2, 3]);
+      I.almostEqual(exp.eval({ x: [2, 3] }), [2, 3]);
     });
   });
 
