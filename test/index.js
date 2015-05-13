@@ -16,11 +16,11 @@ describe('interval arithmetic evaluator', function () {
   describe('with literals', function () {
     it('should cast constants', function () {
       exp = compile('0');
-      cleanAssert(exp, '_I.ZERO');
+      cleanAssert(exp, 'utils.castInterval(_I, 0)');
       I.almostEqual(exp.eval(), [0, 0]);
 
       exp = compile('1');
-      cleanAssert(exp, '_I.ONE');
+      cleanAssert(exp, 'utils.castInterval(_I, 1)');
       I.almostEqual(exp.eval(), [1, 1]);
     });
 
@@ -53,6 +53,10 @@ describe('interval arithmetic evaluator', function () {
       cleanAssert(exp, '_I.PI');
       I.almostEqual(exp.eval(), I.PI);
 
+      exp = compile('ZERO');
+      cleanAssert(exp, '_I.ZERO');
+      I.almostEqual(exp.eval(), I.ZERO);
+
       exp = compile('ONE');
       cleanAssert(exp, '_I.ONE');
       I.almostEqual(exp.eval(), I.ONE);
@@ -79,8 +83,14 @@ describe('interval arithmetic evaluator', function () {
       I.almostEqual(exp.eval({ x: 3 }), [3, 3]);
 
       // arrays as a bounded interval
-      exp = compile('x');
       I.almostEqual(exp.eval({ x: [2, 3] }), [2, 3]);
+
+      // intervals should not be modified
+      I.almostEqual(exp.eval({ x: new I(4) }), [4, 4]);
+
+      // duck typing
+      var x = {lo: -1, hi: 1};
+      I.almostEqual(exp.eval({ x: x }), [-1, 1]);
     });
   });
 
@@ -88,13 +98,13 @@ describe('interval arithmetic evaluator', function () {
     it('should negate an interval', function () {
       // negative
       exp = compile('-1');
-      cleanAssert(exp, '_I.negative(_I.ONE)');
+      cleanAssert(exp, '_I.negative(utils.castInterval(_I, 1))');
       I.almostEqual(exp.eval(), [-1, -1]);
     });
 
     it('should apply it multiple times', function () {
       exp = compile('-+-1');
-      cleanAssert(exp, '_I.negative(_I.positive(_I.negative(_I.ONE)))');
+      cleanAssert(exp, '_I.negative(_I.positive(_I.negative(utils.castInterval(_I, 1))))');
       I.almostEqual(exp.eval(), [1, 1]);
     });
 
@@ -112,13 +122,13 @@ describe('interval arithmetic evaluator', function () {
   });
 
   describe('with binary operators', function () {
-    it('should compute interval addition', function () {
+    it('should compute interval addition/subtraction', function () {
       exp = compile('1 + 2');
-      cleanAssert(exp, '_I.add(_I.ONE, utils.castInterval(_I, 2))');
+      cleanAssert(exp, '_I.add(utils.castInterval(_I, 1), utils.castInterval(_I, 2))');
       I.almostEqual(exp.eval(), [3, 3]);
 
       exp = compile('1 + [2, 3]');
-      cleanAssert(exp, '_I.add(_I.ONE, utils.castInterval(_I, [2, 3]))');
+      cleanAssert(exp, '_I.add(utils.castInterval(_I, 1), utils.castInterval(_I, [2, 3]))');
       I.almostEqual(exp.eval(), [3, 4]);
 
       exp = compile('[-1, 1] + [1, 1]');
@@ -128,15 +138,13 @@ describe('interval arithmetic evaluator', function () {
       exp = compile('[-1, 1] + [1, -1]');
       cleanAssert(exp, '_I.add(utils.castInterval(_I, [-1, 1]), utils.castInterval(_I, [1, -1]))');
       I.empty(exp.eval());
-    });
 
-    it('should compute interval subtraction', function () {
       exp = compile('1 - 2');
-      cleanAssert(exp, '_I.sub(_I.ONE, utils.castInterval(_I, 2))');
+      cleanAssert(exp, '_I.sub(utils.castInterval(_I, 1), utils.castInterval(_I, 2))');
       I.almostEqual(exp.eval(), [-1, -1]);
 
       exp = compile('1 - [2, 3]');
-      cleanAssert(exp, '_I.sub(_I.ONE, utils.castInterval(_I, [2, 3]))');
+      cleanAssert(exp, '_I.sub(utils.castInterval(_I, 1), utils.castInterval(_I, [2, 3]))');
       I.almostEqual(exp.eval(), [-2, -1]);
 
       exp = compile('[-1, 1] - [1, +1]');
@@ -150,7 +158,7 @@ describe('interval arithmetic evaluator', function () {
 
     it('should compute interval powers (with integer powers only)', function () {
       exp = compile('1^2');
-      cleanAssert(exp, '_I.pow(_I.ONE, 2)');
+      cleanAssert(exp, '_I.pow(utils.castInterval(_I, 1), 2)');
       I.almostEqual(exp.eval(), [1, 1]);
 
       exp = compile('3^2');
@@ -201,7 +209,7 @@ describe('interval arithmetic evaluator', function () {
       I.almostEqual(exp.eval({ x: [-3, 2] }), [0, 2]);
 
       exp = compile('1/x');
-      cleanAssert(exp, '_I.div(_I.ONE, utils.castIdentifier(_I, scope["x"]))');
+      cleanAssert(exp, '_I.div(utils.castInterval(_I, 1), utils.castIdentifier(_I, scope["x"]))');
       I.almostEqual(exp.eval({ x: 1 }), [1, 1]);
       I.empty(exp.eval({ x: 0 }));
       I.empty(exp.eval({ x: [-1, 1] }));
