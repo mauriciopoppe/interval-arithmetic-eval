@@ -1,6 +1,8 @@
-# interval-arithmetic-eval [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+# interval-arithmetic-eval 
 
 [![NPM][npm-image]][npm-url]
+
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][david-image]][david-url]
 
 > Interprets/evaluates mathematical expressions using interval arithmetic
 
@@ -39,3 +41,5 @@ var compile = require('interval-arithmetic-eval');
 [travis-url]: https://travis-ci.org/maurizzzio/interval-arithmetic-eval
 [coveralls-image]: https://coveralls.io/repos/maurizzzio/interval-arithmetic-eval/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/r/maurizzzio/interval-arithmetic-eval?branch=master
+[david-image]: https://david-dm.org/maurizzzio/interval-arithmetic-eval.svg
+[david-url]: https://david-dm.org/maurizzzio/interval-arithmetic-eval
