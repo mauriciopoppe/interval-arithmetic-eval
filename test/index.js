@@ -31,9 +31,13 @@ describe('interval arithmetic evaluator', function () {
     });
 
     it('should cast arrays as interval', function () {
-      exp = compile('[2, 3]');
-      cleanAssert(exp, 'utils.castInterval(_I, [2, 3])');
-      I.almostEqual(exp.eval(), [2, 3]);
+      exp = compile('[-2, 3]');
+      cleanAssert(exp, 'utils.castInterval(_I, [-2, 3])');
+      I.almostEqual(exp.eval(), [-2, 3]);
+
+      assert.throws(function () {
+        compile('[-a, 3]');
+      });
     });
   });
 
@@ -60,6 +64,13 @@ describe('interval arithmetic evaluator', function () {
 
       exp = compile('_');
       cleanAssert(exp, 'utils.castIdentifier(_I, scope["_"])');
+    });
+
+    it('should throw on undefined functions', function () {
+      assert.throws(function () {
+        exp = compile('notAFunction(3)');
+        exp.eval();
+      });
     });
 
     it('should eval scope stored variables', function () {
@@ -91,6 +102,12 @@ describe('interval arithmetic evaluator', function () {
       exp = compile('-[1, 3]');
       cleanAssert(exp, '_I.negative(utils.castInterval(_I, [1 ,3]))');
       I.almostEqual(exp.eval(), [-3, -1]);
+    });
+
+    it('should throw on non existent', function () {
+      assert.throws(function () {
+        compile('!3');
+      });
     });
   });
 
@@ -188,6 +205,25 @@ describe('interval arithmetic evaluator', function () {
       I.almostEqual(exp.eval({ x: 1 }), [1, 1]);
       I.empty(exp.eval({ x: 0 }));
       I.empty(exp.eval({ x: [-1, 1] }));
+    });
+  });
+
+  describe('policies', function () {
+    var old = compile.policies.identifierAllowed;
+    before(function () {
+      compile.policies.identifierAllowed = function (exp) {
+        return exp === 'x';
+      };
+    });
+
+    after(function () {
+      compile.policies.identifierAllowed = old;
+    });
+
+    it('should throw when a policy restricts the identifies', function () {
+      assert.throws(function () {
+        compile('y');
+      });
     });
   });
 });
