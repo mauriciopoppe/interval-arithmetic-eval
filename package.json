@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "jsep": "^0.3.0",
-    "interval-arithmetic": "^0.1.3"
+    "interval-arithmetic": "^0.2.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",

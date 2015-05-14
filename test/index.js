@@ -222,16 +222,23 @@ describe('interval arithmetic evaluator', function () {
       compile.policies.identifierAllowed = function (exp) {
         return exp === 'x';
       };
+      compile.policies.disableRound();
     });
 
     after(function () {
       compile.policies.identifierAllowed = old;
+      compile.policies.enableRound();
     });
 
     it('should throw when a policy restricts the identifies', function () {
       assert.throws(function () {
         compile('y');
       });
+    });
+
+    it('should disable round modes', function () {
+      exp = compile('1 / 3').eval();
+      assert(1/3 === exp.lo && exp.lo === exp.hi);
     });
   });
 });
