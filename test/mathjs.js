@@ -3,9 +3,8 @@
  */
 'use strict';
 var math = require('mathjs');
-//var Interval = require('interval-arithmetic');
 
-var exp = math.parse('1 / 3');
+var exp = math.parse('ceil(1)');
 console.log(exp.compile(math).eval.toString());
 console.log(JSON.stringify(exp, null, 2));
 

@@ -17,7 +17,7 @@ function almostEqual(a, b) {
 }
 
 describe('interval arithmetic evaluator', function () {
-  describe('with ConstantExpressions', function () {
+  describe('with literals', function () {
     it('should cast constants', function () {
       exp = compile('0');
       cleanAssert(exp, 'ns.factory(0)');
@@ -27,6 +27,9 @@ describe('interval arithmetic evaluator', function () {
       cleanAssert(exp, 'ns.factory(1)');
       almostEqual(exp.eval(), [1, 1]);
 
+      assert.throws(function () {
+        compile('"1"');
+      });
     });
 
     it('should cast arrays as interval', function () {
@@ -49,6 +52,10 @@ describe('interval arithmetic evaluator', function () {
 
       exp = compile('ONE');
       almostEqual(exp.eval(), Interval.ONE);
+
+      assert.throws(function () {
+        console.log(compile('1 or 2'));
+      });
     });
 
     it('should compile scope stored variables', function () {
@@ -159,6 +166,14 @@ describe('interval arithmetic evaluator', function () {
     });
   });
 
+  describe('with non-existent expression types', function () {
+    it('should throw', function () {
+      assert.throws(function () {
+        compile('f(x) = 3');
+      });
+    });
+  });
+
   describe('with various operations', function () {
     it('should compute random operations', function () {
       exp = compile('cos([0, 3.15])');
@@ -216,6 +231,43 @@ describe('interval arithmetic evaluator', function () {
 
       exp = compile('sin(exp(x)) + tan(x) - 1/cos(PI) * [1, 3]^2');
       almostEqual(exp.eval({ x: [0, 1] }), [1.4107812905029047, 11.557407724654915]);
+    });
+  });
+
+  describe('assignment', function () {
+    it('should update a property of the scope', function () {
+      var scope = {x: 1};
+      compile('y = x').eval(scope);
+      almostEqual(scope.x, scope.y);
+    });
+  });
+
+  describe('block', function () {
+    it('should update a property of the scope', function () {
+      var scope = {x: 1};
+      var exp = compile('y = 1 + x; y + 1');
+      var res = exp.eval(scope);
+      almostEqual(res, [3, 3]);
+      almostEqual(scope.x, [1, 1]);
+      almostEqual(scope.y, [2, 2]);
+    });
+  });
+
+  describe('conditional', function () {
+    it('should work with the ternary operator', function () {
+      var res, exp, scope;
+      scope = {x: 1};
+      exp = compile('x ? [1, 2] : [3, 4]');
+      res = exp.eval(scope);
+      almostEqual(res, [1, 2]);
+
+      // TODO: add comparison operators
+      assert.throws(function () {
+        scope = {x: 1};
+        exp = compile('x != 1 ? [1, 2] : [3, 4]');
+        res = exp.eval(scope);
+        almostEqual(res, [3, 4]);
+      });
     });
   });
 
