@@ -7,10 +7,11 @@ var Interval = require('interval-arithmetic');
 
 function example(exp, message, scope) {
   var code = compile(exp);
+  var copy = scope ? JSON.parse(JSON.stringify(scope)) : null;
   var result = code.eval(scope);
 
   message && console.log('// ' + message);
-  scope && console.log('// scope: ', scope);
+  copy && console.log('// scope: ', copy);
   console.log(exp);
   console.log('> ', result);
   console.log('');
