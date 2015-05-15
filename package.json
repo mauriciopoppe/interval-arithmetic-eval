@@ -23,8 +23,7 @@
     "eval"
   ],
   "dependencies": {
-    "interval-arithmetic": "^0.2.5",
-    "jsep": "^0.3.0",
+    "interval-arithmetic": "^0.2.6",
     "mathjs": "^1.6.0"
   },
   "devDependencies": {

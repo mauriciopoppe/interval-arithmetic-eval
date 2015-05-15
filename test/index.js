@@ -261,13 +261,10 @@ describe('interval arithmetic evaluator', function () {
       res = exp.eval(scope);
       almostEqual(res, [1, 2]);
 
-      // TODO: add comparison operators
-      assert.throws(function () {
-        scope = {x: 1};
-        exp = compile('x != 1 ? [1, 2] : [3, 4]');
-        res = exp.eval(scope);
-        almostEqual(res, [3, 4]);
-      });
+      scope = {x: 1};
+      exp = compile('x > 2 ? [1, 2] : [3, 4]');
+      res = exp.eval(scope);
+      almostEqual(res, [3, 4]);
     });
   });
 
