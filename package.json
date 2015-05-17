@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "interval-arithmetic": "^0.2.7",
-    "math-codegen": "^0.2.2"
+    "math-codegen": "^0.2.3"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
