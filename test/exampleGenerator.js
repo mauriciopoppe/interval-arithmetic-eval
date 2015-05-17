@@ -65,5 +65,5 @@ example('x', 'using the interval [2, 3] stored in scope.x', {x: [2, 3]});
 example('x', 'using the interval Instance stored in scope.x', {x: new Interval(2, 3)});
 example('ONE + x', 'adding a constant and a scope variable', {x: [1, 1]});
 example('x / y', 'division between two variables stored in the scope', {x: [2, 3], y: [1, 2]});
-example('sin(exp(x)) + tan(x) - 1/cos(PI) * [1, 3]^2', 'complex expression', {x: [0, 1]});
+example('sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)', 'complex expression', {x: [0, 1]});
 console.log('```');
