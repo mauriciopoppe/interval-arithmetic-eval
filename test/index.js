@@ -218,7 +218,7 @@ describe('interval arithmetic evaluator', function () {
       )
 
       exp = compile('sin(exp(x)) + tan(x) - 1/cos(PI) * [1, 3]^2')
-      almostEqual(exp.eval({ x: [0, 1] }), [1.4107812905029047, 11.557407724654915])
+      almostEqual(exp.eval({ x: [0, 1] }), y)
 
       exp = compile('x^2 - 2')
       almostEqual(exp.eval({ x: 2 }), [2, 2])
