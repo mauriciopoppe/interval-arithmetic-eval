@@ -1,8 +1,11 @@
 # interval-arithmetic-eval 
 
+[![Build Status][travis-image]][travis-url] 
 [![NPM][npm-image]][npm-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![Stability](https://img.shields.io/badge/stability-unstable-yellow.svg)]()
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][david-image]][david-url]
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 > Interprets/evaluates mathematical expressions using interval arithmetic
 
@@ -14,7 +17,7 @@
 - [Installation](#installation)
 - [API](#api)
   - [`code = compile(expression)`](#code--compileexpression)
-  - [`code.eval([scope])`](#codeevalscope)
+    - [`code.eval([scope])`](#codeevalscope)
   - [`compile.policies`](#compilepolicies)
     - [`compile.policies.identifierAllowed`](#compilepoliciesidentifierallowed)
     - [`compile.policies.disableRounding`](#compilepoliciesdisablerounding)
@@ -23,7 +26,6 @@
   - [Basic operations](#basic-operations)
   - [Function calls](#function-calls)
   - [Scope substitution](#scope-substitution)
-- [Inspiration projects](#inspiration-projects)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -74,12 +76,8 @@ var compile = require('interval-arithmetic-eval');
 
 **returns** {Object}
 * `return.eval` {function} The compiled function to be called with some scope variables
-* `return.rawBody` {string} The contents of the body 
-* `return.body` {string} `rawBody` prefixed with `return `
-* `return.rawFn` {string} a string representation of the function created with a Function
-constructor (invoking `eval` will call this function with the required variables to work with)
 
-### `code.eval([scope])`
+#### `code.eval([scope])`
 
 **params**
 * `scope` {Object} 
@@ -293,13 +291,9 @@ sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)
 
 ```
 
-## Inspiration projects
-
-- [math.js expression parser](http://mathjs.org/docs/expressions/index.html)
-
 2015 © Mauricio Poppe
 
-[npm-image]: https://nodei.co/npm/interval-arithmetic-eval.png?downloads=true
+[npm-image]: https://img.shields.io/npm/v/interval-arithmetic-eval.svg?style=flat
 [npm-url]: https://npmjs.org/package/interval-arithmetic-eval
 [travis-image]: https://travis-ci.org/maurizzzio/interval-arithmetic-eval.svg?branch=master
 [travis-url]: https://travis-ci.org/maurizzzio/interval-arithmetic-eval
