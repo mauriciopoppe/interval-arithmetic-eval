@@ -19,6 +19,7 @@ function cleanAssert (a, b) {
 }
 
 function almostEqual (a, b) {
+  // throws if not almost equal
   return Interval.almostEqual(a, b)
 }
 
@@ -115,7 +116,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [0, 2])
 
       exp = compile('[-1, 1] + [1, -1]')
-      assert(Interval.empty(exp.eval()))
+      almostEqual(exp.eval(), [0, 0])
 
       exp = compile('1 - 2')
       almostEqual(exp.eval(), [-1, -1])
@@ -127,7 +128,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [-2, 0])
 
       exp = compile('[-1, 1] - [1, -1]')
-      assert(Interval.empty(exp.eval()))
+      almostEqual(exp.eval(), [0, 0])
     })
 
     it('should compute interval powers (with integer powers only)', function () {
@@ -141,7 +142,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [4, 9])
 
       exp = compile('[2, 3]^[2, 3]')
-      assert(Interval.empty(exp.eval()))
+      assert(Interval.isEmpty(exp.eval()))
 
       exp = compile('x^2')
       almostEqual(exp.eval({ x: 2 }), [4, 4])
@@ -187,6 +188,9 @@ describe('interval arithmetic evaluator', function () {
       exp = compile('sqrt(2)^2')
       almostEqual(exp.eval(), [2, 2])
 
+      exp = compile('nthRoot(-8, 3)')
+      almostEqual(exp.eval(), [-2, -2])
+
       exp = compile('sqrt([2, 3])^2')
       almostEqual(exp.eval(), [2, 3])
 
@@ -197,7 +201,7 @@ describe('interval arithmetic evaluator', function () {
 
       exp = compile('1 / x')
       almostEqual(exp.eval({ x: 1 }), [1, 1])
-      assert(Interval.whole(exp.eval({ x: [-1, 1] })))
+      assert(Interval.isWhole(exp.eval({ x: [-1, 1] })))
 
       exp = compile('x / y')
       almostEqual(exp.eval({ x: [2, 3], y: [1, 2] }), [1, 3])
