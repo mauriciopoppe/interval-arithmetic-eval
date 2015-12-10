@@ -1,7 +1,7 @@
 # interval-arithmetic-eval 
 
-[![Build Status][travis-image]][travis-url] 
 [![NPM][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url] 
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![Stability](https://img.shields.io/badge/stability-unstable-yellow.svg)]()
 
