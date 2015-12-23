@@ -116,7 +116,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [0, 2])
 
       exp = compile('[-1, 1] + [1, -1]')
-      almostEqual(exp.eval(), [0, 0])
+      assert(Interval.isEmpty(exp.eval()))
 
       exp = compile('1 - 2')
       almostEqual(exp.eval(), [-1, -1])
@@ -128,7 +128,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [-2, 0])
 
       exp = compile('[-1, 1] - [1, -1]')
-      almostEqual(exp.eval(), [0, 0])
+      assert(Interval.isEmpty(exp.eval()))
     })
 
     it('should compute interval powers (with integer powers only)', function () {
