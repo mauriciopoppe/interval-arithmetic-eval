@@ -1,6 +1,6 @@
 {
   "name": "interval-arithmetic-eval",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Interprets/evaluates mathematical expressions using interval arithmetic",
   "bugs": "https://github.com/maurizzzio/interval-arithmetic-eval/issues",
   "license": "MIT",
