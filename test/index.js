@@ -7,7 +7,7 @@ var before = mocha.before
 var after = mocha.after
 
 var assert = require('assert')
-var Interval = require('interval-arithmetic')
+var Interval = require('interval-arithmetic').default
 var compile = require('../')
 var exp
 
@@ -48,6 +48,7 @@ describe('interval arithmetic evaluator', function () {
       almostEqual(exp.eval(), [3, 3])
 
       exp = compile('PI')
+
       almostEqual(exp.eval(), Interval.PI)
 
       exp = compile('ZERO')

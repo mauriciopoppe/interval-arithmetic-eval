@@ -25,7 +25,7 @@
     "eval"
   ],
   "dependencies": {
-    "interval-arithmetic": "^0.6.6",
+    "interval-arithmetic": "^1.0.6",
     "math-codegen": "^0.3.5"
   },
   "devDependencies": {
