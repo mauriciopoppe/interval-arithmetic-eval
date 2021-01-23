@@ -1,7 +1,7 @@
-# interval-arithmetic-eval 
+# interval-arithmetic-eval
 
 [![NPM][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url] 
+![ci](https://github.com/mauriciopoppe/interval-arithmetic-eval/workflows/ci/badge.svg)
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![Stability](https://img.shields.io/badge/stability-unstable-yellow.svg)]()
 
@@ -57,7 +57,7 @@ var compile = require('interval-arithmetic-eval');
   - numbers are turned into [singleton intervals](https://github.com/maurizzzio/interval-arithmetic#instancesingletonv)
 - identifiers
   - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic)
-  - The properties declared in a scope object (top level only) 
+  - The properties declared in a scope object (top level only)
 - binary expressions
   - `+` addition
   - `-` subtraction
@@ -72,7 +72,7 @@ var compile = require('interval-arithmetic-eval');
 - call expressions
   - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic)
   except `pow` (which is a special operator)
-  - The functions declared in a scope object (top level only) 
+  - The functions declared in a scope object (top level only)
 
 **returns** {Object}
 * `return.eval` {function} The compiled function to be called with some scope variables
@@ -80,15 +80,15 @@ var compile = require('interval-arithmetic-eval');
 #### `code.eval([scope])`
 
 **params**
-* `scope` {Object} 
+* `scope` {Object}
 
 An optional object which holds some variables used in the original expression
-to be substituted, the following transformations are done with the values when evaluated  
+to be substituted, the following transformations are done with the values when evaluated
   * a single `number` is converted to a [singleton interval](https://github.com/maurizzzio/interval-arithmetic#instancesingletonv)
   * an `array` is converted to an unbounded [interval](https://github.com/maurizzzio/interval-arithmetic#instanceassignlo-hi),
    NOTE: this method checks empty intervals
   * an `object` which has the `lo` and `hi` properties is converted into an [interval](https://github.com/maurizzzio/interval-arithmetic#instanceassignlo-hi)
-   NOTE: this method checks empty intervals  
+   NOTE: this method checks empty intervals
 
 **returns** {Interval} Returns an instance of the [interval-arithmetic module](https://github.com/maurizzzio/interval-arithmetic)
 
