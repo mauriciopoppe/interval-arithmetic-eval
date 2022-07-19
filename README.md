@@ -2,8 +2,6 @@
 
 [![NPM][npm-image]][npm-url]
 ![ci](https://github.com/mauriciopoppe/interval-arithmetic-eval/workflows/ci/badge.svg)
-[![Coverage Status][coveralls-image]][coveralls-url]
-[![Stability](https://img.shields.io/badge/stability-unstable-yellow.svg)]()
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
@@ -295,9 +293,3 @@ sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)
 
 [npm-image]: https://img.shields.io/npm/v/interval-arithmetic-eval.svg?style=flat
 [npm-url]: https://npmjs.org/package/interval-arithmetic-eval
-[travis-image]: https://travis-ci.org/mauriciopoppe/interval-arithmetic-eval.svg?branch=master
-[travis-url]: https://travis-ci.org/mauriciopoppe/interval-arithmetic-eval
-[coveralls-image]: https://coveralls.io/repos/mauriciopoppe/interval-arithmetic-eval/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/r/mauriciopoppe/interval-arithmetic-eval?branch=master
-[david-image]: https://david-dm.org/mauriciopoppe/interval-arithmetic-eval.svg
-[david-url]: https://david-dm.org/mauriciopoppe/interval-arithmetic-eval
