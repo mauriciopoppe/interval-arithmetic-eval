@@ -31,8 +31,8 @@
 
 ## Description
 
-This module evaluates the generated code from [math-codegen](https://github.com/maurizzzio/math-codegen)
-for the namespace [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic) providing
+This module evaluates the generated code from [math-codegen](https://github.com/mauriciopoppe/math-codegen)
+for the namespace [interval-arithmetic](https://github.com/mauriciopoppe/interval-arithmetic) providing
 the necessary adapter methods
 
 ## Installation
@@ -54,9 +54,9 @@ var compile = require('interval-arithmetic-eval');
 
 `expression` syntax:
 - literals
-  - numbers are turned into [singleton intervals](https://github.com/maurizzzio/interval-arithmetic#instancesingletonv)
+  - numbers are turned into [singleton intervals](https://github.com/mauriciopoppe/interval-arithmetic#instancesingletonv)
 - identifiers
-  - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic)
+  - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/mauriciopoppe/interval-arithmetic)
   - The properties declared in a scope object (top level only)
 - binary expressions
   - `+` addition
@@ -68,9 +68,9 @@ var compile = require('interval-arithmetic-eval');
   - `+` identity
   - `-` negative
 - array expressions
-  - numbers are turned into [intervals](https://github.com/maurizzzio/interval-arithmetic#instanceassignlo-hi)
+  - numbers are turned into [intervals](https://github.com/mauriciopoppe/interval-arithmetic#instanceassignlo-hi)
 - call expressions
-  - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic)
+  - All the methods/utilities/constants available in [interval-arithmetic](https://github.com/mauriciopoppe/interval-arithmetic)
   except `pow` (which is a special operator)
   - The functions declared in a scope object (top level only)
 
@@ -84,13 +84,13 @@ var compile = require('interval-arithmetic-eval');
 
 An optional object which holds some variables used in the original expression
 to be substituted, the following transformations are done with the values when evaluated
-  * a single `number` is converted to a [singleton interval](https://github.com/maurizzzio/interval-arithmetic#instancesingletonv)
-  * an `array` is converted to an unbounded [interval](https://github.com/maurizzzio/interval-arithmetic#instanceassignlo-hi),
+  * a single `number` is converted to a [singleton interval](https://github.com/mauriciopoppe/interval-arithmetic#instancesingletonv)
+  * an `array` is converted to an unbounded [interval](https://github.com/mauriciopoppe/interval-arithmetic#instanceassignlo-hi),
    NOTE: this method checks empty intervals
-  * an `object` which has the `lo` and `hi` properties is converted into an [interval](https://github.com/maurizzzio/interval-arithmetic#instanceassignlo-hi)
+  * an `object` which has the `lo` and `hi` properties is converted into an [interval](https://github.com/mauriciopoppe/interval-arithmetic#instanceassignlo-hi)
    NOTE: this method checks empty intervals
 
-**returns** {Interval} Returns an instance of the [interval-arithmetic module](https://github.com/maurizzzio/interval-arithmetic)
+**returns** {Interval} Returns an instance of the [interval-arithmetic module](https://github.com/mauriciopoppe/interval-arithmetic)
 
 ### `compile.policies`
 
@@ -295,9 +295,9 @@ sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)
 
 [npm-image]: https://img.shields.io/npm/v/interval-arithmetic-eval.svg?style=flat
 [npm-url]: https://npmjs.org/package/interval-arithmetic-eval
-[travis-image]: https://travis-ci.org/maurizzzio/interval-arithmetic-eval.svg?branch=master
-[travis-url]: https://travis-ci.org/maurizzzio/interval-arithmetic-eval
-[coveralls-image]: https://coveralls.io/repos/maurizzzio/interval-arithmetic-eval/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/r/maurizzzio/interval-arithmetic-eval?branch=master
-[david-image]: https://david-dm.org/maurizzzio/interval-arithmetic-eval.svg
-[david-url]: https://david-dm.org/maurizzzio/interval-arithmetic-eval
+[travis-image]: https://travis-ci.org/mauriciopoppe/interval-arithmetic-eval.svg?branch=master
+[travis-url]: https://travis-ci.org/mauriciopoppe/interval-arithmetic-eval
+[coveralls-image]: https://coveralls.io/repos/mauriciopoppe/interval-arithmetic-eval/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/mauriciopoppe/interval-arithmetic-eval?branch=master
+[david-image]: https://david-dm.org/mauriciopoppe/interval-arithmetic-eval.svg
+[david-url]: https://david-dm.org/mauriciopoppe/interval-arithmetic-eval

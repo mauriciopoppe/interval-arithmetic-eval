@@ -1,15 +1,15 @@
 'use strict'
 
-var mocha = require('mocha')
-var it = mocha.it
-var describe = mocha.describe
-var before = mocha.before
-var after = mocha.after
+const mocha = require('mocha')
+const it = mocha.it
+const describe = mocha.describe
+const before = mocha.before
+const after = mocha.after
 
-var assert = require('assert')
-var Interval = require('interval-arithmetic').default
-var compile = require('../')
-var exp
+const assert = require('assert')
+const Interval = require('interval-arithmetic').default
+const compile = require('../')
+let exp
 
 function cleanAssert (a, b) {
   assert(a && a.code)
@@ -61,21 +61,21 @@ describe('interval arithmetic evaluator', function () {
     it('should compile scope stored variables', function () {
       exp = compile('x')
 
-      var scope
-      scope = {x: 1}
+      let scope
+      scope = { x: 1 }
       almostEqual(exp.eval(scope), Interval.ONE)
       almostEqual(scope.x, Interval.ONE)
 
-      scope = {x: [-1, 2]}
+      scope = { x: [-1, 2] }
       almostEqual(exp.eval(scope), [-1, 2])
       almostEqual(scope.x, [-1, 2])
 
-      scope = {x: Interval.factory(-1, 2)}
+      scope = { x: Interval.factory(-1, 2) }
       almostEqual(exp.eval(scope), [-1, 2])
       almostEqual(scope.x, [-1, 2])
 
       // duck typing
-      scope = {x: {lo: -1, hi: 2}}
+      scope = { x: { lo: -1, hi: 2 } }
       almostEqual(exp.eval(scope), [-1, 2])
     })
 
@@ -210,8 +210,8 @@ describe('interval arithmetic evaluator', function () {
       exp = compile('sin(exp(x))')
       almostEqual(exp.eval({ x: [0, 1] }), [0.41078129050290557, 1])
 
-      var x = new Interval(0, 1)
-      var y = Interval.add(
+      const x = new Interval(0, 1)
+      const y = Interval.add(
         Interval.sin(Interval.exp(x)),
         Interval.sub(
           Interval.tan(x),
@@ -232,7 +232,7 @@ describe('interval arithmetic evaluator', function () {
 
   describe('assignment', function () {
     it('should update a property of the scope', function () {
-      var scope = {x: 1}
+      const scope = { x: 1 }
       compile('y = x').eval(scope)
       almostEqual(scope.x, scope.y)
     })
@@ -240,9 +240,9 @@ describe('interval arithmetic evaluator', function () {
 
   describe('block', function () {
     it('should update a property of the scope', function () {
-      var scope = {x: 1}
-      var exp = compile('y = 1 + x; y + 1')
-      var res = exp.eval(scope)
+      const scope = { x: 1 }
+      const exp = compile('y = 1 + x; y + 1')
+      const res = exp.eval(scope)
       almostEqual(res, [3, 3])
       almostEqual(scope.x, [1, 1])
       almostEqual(scope.y, [2, 2])
@@ -251,33 +251,33 @@ describe('interval arithmetic evaluator', function () {
 
   describe('conditional', function () {
     it('should work with the ternary operator', function () {
-      var res, exp, scope
-      scope = {x: 1}
+      let res, exp, scope
+      scope = { x: 1 }
       exp = compile('x < 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [1, 2])
 
-      scope = {x: 2}
+      scope = { x: 2 }
       exp = compile('x == 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [1, 2])
 
-      scope = {x: 2}
+      scope = { x: 2 }
       exp = compile('x === 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [1, 2])
 
-      scope = {x: 2}
+      scope = { x: 2 }
       exp = compile('x != 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [3, 4])
 
-      scope = {x: 2}
+      scope = { x: 2 }
       exp = compile('x !== 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [3, 4])
 
-      scope = {x: 1}
+      scope = { x: 1 }
       exp = compile('x > 2 ? [1, 2] : [3, 4]')
       res = exp.eval(scope)
       almostEqual(res, [3, 4])
