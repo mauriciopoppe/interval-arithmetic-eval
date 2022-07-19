@@ -2,13 +2,13 @@
  * Created by mauricio on 5/13/15.
  */
 'use strict'
-var compile = require('../')
-var Interval = require('interval-arithmetic')
+const compile = require('../')
+const Interval = require('interval-arithmetic')
 
 function example (exp, message, scope) {
-  var code = compile(exp)
-  var copy = scope ? JSON.parse(JSON.stringify(scope)) : null
-  var result = code.eval(scope)
+  const code = compile(exp)
+  const copy = scope ? JSON.parse(JSON.stringify(scope)) : null
+  const result = code.eval(scope)
 
   message && console.log('// ' + message)
   copy && console.log('// scope: ', copy)
@@ -60,10 +60,10 @@ console.log('```')
 
 console.log('### Scope substitution')
 console.log('```javascript')
-example('x', 'using the number 4 stored in scope.x', {x: 4})
-example('x', 'using the interval [2, 3] stored in scope.x', {x: [2, 3]})
-example('x', 'using the interval Instance stored in scope.x', {x: new Interval(2, 3)})
-example('ONE + x', 'adding a constant and a scope variable', {x: [1, 1]})
-example('x / y', 'division between two variables stored in the scope', {x: [2, 3], y: [1, 2]})
-example('sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)', 'complex expression', {x: [0, 1]})
+example('x', 'using the number 4 stored in scope.x', { x: 4 })
+example('x', 'using the interval [2, 3] stored in scope.x', { x: [2, 3] })
+example('x', 'using the interval Instance stored in scope.x', { x: new Interval(2, 3) })
+example('ONE + x', 'adding a constant and a scope variable', { x: [1, 1] })
+example('x / y', 'division between two variables stored in the scope', { x: [2, 3], y: [1, 2] })
+example('sin(exp(x)) + tan(x) - 1/cos(PI) * ([1, 3]^2)', 'complex expression', { x: [0, 1] })
 console.log('```')
