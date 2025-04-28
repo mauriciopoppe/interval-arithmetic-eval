@@ -5,7 +5,7 @@
   "bugs": "https://github.com/mauriciopoppe/interval-arithmetic-eval/issues",
   "license": "MIT",
   "main": "index.js",
-  "author": "Mauricio Poppe <5gl9sqyff@mozmail.com>",
+  "author": "Mauricio Poppe",
   "files": [
     "index.js",
     "lib",
