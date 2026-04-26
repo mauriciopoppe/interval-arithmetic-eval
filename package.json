@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "interval-arithmetic": "^1.1.2",
-    "math-codegen": "^0.4.1"
+    "math-codegen": "^0.4.3"
   },
   "devDependencies": {
     "doctoc": "^2.2.0",
